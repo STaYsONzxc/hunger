@@ -78,22 +78,25 @@ class VoiceChangerV2(VoiceChangerIF):
     sola_buffer: AudioInOut
 
     def __init__(self, params: VoiceChangerParams):
-        # 初期化
         self.settings = VoiceChangerV2Settings()
         self.currentCrossFadeOffsetRate = 0.0
         self.currentCrossFadeEndRate = 0.0
-        self.currentCrossFadeOverlapSize = 0  # setting
-        self.crossfadeSize = 0  # calculated
-
+        self.currentCrossFadeOverlapSize = 0  
+        self.crossfadeSize = 0 
         self.voiceChanger: VoiceChangerModel | None = None
         self.params = params
-        self.gpu_num = torch.cuda.device_count()
+        self.gpu_num = 2 
         self.prev_audio = np.zeros(4096)
         self.mps_enabled: bool = getattr(torch.backends, "mps", None) is not None and torch.backends.mps.is_available()
         self.onnx_device = onnxruntime.get_device()
         self.noCrossFade = False
 
-        logger.info(f"VoiceChangerV2 Initialized (GPU_NUM(cuda):{self.gpu_num}, mps_enabled:{self.mps_enabled}, onnx_device:{self.onnx_device})")
+        if torch.cuda.is_available():
+            torch.cuda.set_device(0) 
+            torch.cuda.init()
+
+        logger.info(f"VoiceChangerV2 инициализирован (GPU_NUM(cuda): {self.gpu_num}, mps_enabled: {self.mps_enabled}, onnx_device: {self.onnx_device})")
+
 
     def setModel(self, model: VoiceChangerModel):
         self.voiceChanger = model
