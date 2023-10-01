@@ -128,7 +128,7 @@ def localServer(logLevel: str = "critical"):
         logger.error(f"[Hunger Changer] Web Server Launch Exception, {e}")
 
 
-if __name__ == "MMVCServerSIO":
+if __name__ == "Hunger":
     mp.freeze_support()
 
     voiceChangerManager = VoiceChangerManager.get_instance(voiceChangerParams)

@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+Hungerfrom dataclasses import dataclass, field
 from typing import TypeAlias, Union, Any
 from const import VoiceChangerType
 
