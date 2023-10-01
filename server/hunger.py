@@ -125,7 +125,7 @@ def localServer(logLevel: str = "critical"):
             log_level=logLevel,
         )
     except Exception as e:
-        logger.error(f"[Voice Changer] Web Server Launch Exception, {e}")
+        logger.error(f"[Hunger Changer] Web Server Launch Exception, {e}")
 
 
 if __name__ == "MMVCServerSIO":
@@ -146,8 +146,8 @@ if __name__ == "__main__":
     logger.debug(args)
 
     printMessage(f"PYTHON:{sys.version}", level=2)
-    # printMessage("Voice Changerを起動しています。", level=2)
-    printMessage("Activating the Voice Changer.", level=2)
+    # printMessage("Hunger Changerを起動しています。", level=2)
+    printMessage("Activating the Hunger Changer.", level=2)
     # ダウンロード(Weight)
     try:
         downloadWeight(voiceChangerParams)
@@ -159,7 +159,7 @@ if __name__ == "__main__":
     try:
         downloadInitialSamples(args.sample_mode, args.model_dir)
     except Exception as e:
-        printMessage(f"[Voice Changer] loading sample failed {e}", level=2)
+        printMessage(f"[Hunger Changer] loading sample failed {e}", level=2)
 
     # PORT = args.p
 
@@ -247,7 +247,7 @@ if __name__ == "__main__":
                 log_level=args.logLevel,
             )
         except Exception as e:
-            logger.error(f"[Voice Changer] Web Server(https) Launch Exception, {e}")
+            logger.error(f"[Hunger Changer] Web Server(https) Launch Exception, {e}")
 
     else:
         p = mp.Process(name="p", target=localServer, args=(args.logLevel,))
@@ -265,4 +265,4 @@ if __name__ == "__main__":
                 p.terminate()
 
         except Exception as e:
-            logger.error(f"[Voice Changer] Client Launch Exception, {e}")
+            logger.error(f"[Hunger Changer] Client Launch Exception, {e}")
